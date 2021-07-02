@@ -14,16 +14,29 @@ struct ContentView: View {
     @State private var outputSystem = 0
     @State private var inputUnits = 0
     @State private var outputUnits = 0
+    @State private var input = ""
     
 //    Initialize conversion type array
     let conversionTypes = ["Temperature", "Length", "Volume"]
     let systems = ["Metric", "Imperial"]
-    let measures = [[["Celsius"], ["Fahrenheit"]], [["Meter", "Kilometer"], ["Foot", "Yard", "Mile"]], [["Millileter", "Liter"], ["Pint", "Quart", "Gallon"]]]
+    let measures = [
+        [["Celsius"], ["Fahrenheit"]],
+        [["Meter", "Kilometer"], ["Foot", "Yard", "Mile"]],
+        [["Millileter", "Liter"], ["Pint", "Quart", "Gallon"]]
+    ]
+    
+    var output: Double {
+        let type = conversionTypes[conversionType]
+        let iSystem = systems[inputSystem]
+        let oSystem = systems[outputSystem]
+        let iUnit = measures[conversionType][inputSystem][inputUnits]
+        let oUnit = measures[conversionType][inputSystem][inputUnits]
+    }
     
     var body: some View {
         NavigationView {
             Form {
-                Section (header: Text("What type of conversion do you need?")){
+                Section (header: Text("Conversion Type")){
                     Picker("Conversion Type", selection: $conversionType) {
                         ForEach(0 ..< conversionTypes.count) {
                             Text("\(self.conversionTypes[$0])")
@@ -44,6 +57,8 @@ struct ContentView: View {
                         }
                     }
                     .pickerStyle(SegmentedPickerStyle())
+                    TextField("Input", text: $input)
+                        .keyboardType(.decimalPad)
                 }
                 Section (header: Text("Converting To")) {
                     Picker("To System", selection: $outputSystem) {

@@ -31,6 +31,8 @@ struct ContentView: View {
         let oSystem = systems[outputSystem]
         let iUnit = measures[conversionType][inputSystem][inputUnits]
         let oUnit = measures[conversionType][inputSystem][inputUnits]
+        
+        return 0.0
     }
     
     var body: some View {
@@ -73,6 +75,10 @@ struct ContentView: View {
                         }
                     }
                     .pickerStyle(SegmentedPickerStyle())
+                }
+                Section {
+                    Text("\(output, specifier: "%.2f") \(measures[conversionType][outputSystem][outputUnits])")
+                        .multilineTextAlignment(.center)
                 }
             }
             .navigationBarTitle("UnitConverter")

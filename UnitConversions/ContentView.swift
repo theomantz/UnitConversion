@@ -12,11 +12,13 @@ struct ContentView: View {
     @State private var conversionType = 0
     @State private var inputSystem = 0
     @State private var outputSystem = 0
+    @State private var inputUnits = 0
+    @State private var outputUnits = 0
     
 //    Initialize conversion type array
     let conversionTypes = ["Temperature", "Length", "Volume"]
     let systems = ["Metric", "Imperial"]
-    let tempMeasures = ["Fahrenheit", "Celsius", "Kelvin"]
+    let measures = [[["Celsius"], ["Fahrenheit"]], [["Meter", "Kilometer"], ["Foot", "Yard", "Mile"]], [["Millileter", "Liter"], ["Pint", "Quart", "Gallon"]]]
     
     var body: some View {
         NavigationView {
@@ -30,17 +32,29 @@ struct ContentView: View {
                     .pickerStyle(SegmentedPickerStyle())
                 }
                 Section (header: Text("Converting From")){
-                    Picker("From Units", selection: $inputSystem) {
+                    Picker("From System", selection: $inputSystem) {
                         ForEach(0 ..< systems.count) {
                             Text("\(self.systems[$0])")
                         }
                     }
                     .pickerStyle(SegmentedPickerStyle())
+                    Picker("Input Units", selection: $inputUnits) {
+                        ForEach(0 ..< measures[conversionType][inputSystem].count) {
+                            Text("\(self.measures[conversionType][inputSystem][$0])")
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
                 }
                 Section (header: Text("Converting To")) {
-                    Picker("To Units", selection: $outputSystem) {
+                    Picker("To System", selection: $outputSystem) {
                         ForEach(0 ..< systems.count) {
                             Text("\(self.systems[$0])")
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    Picker("Output Units", selection: $outputUnits) {
+                        ForEach(0 ..< measures[conversionType][outputSystem].count) {
+                            Text("\(self.measures[conversionType][outputSystem][$0])")
                         }
                     }
                     .pickerStyle(SegmentedPickerStyle())

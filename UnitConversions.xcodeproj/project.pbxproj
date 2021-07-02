@@ -24,6 +24,7 @@
 		E400EC3A268E6895008E1CE5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E400EC3D268E6895008E1CE5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E400EC3F268E6895008E1CE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E4F8AF40268FB29800F66F18 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +60,7 @@
 				E400EC31268E6894008E1CE5 /* AppDelegate.swift */,
 				E400EC33268E6894008E1CE5 /* SceneDelegate.swift */,
 				E400EC35268E6894008E1CE5 /* ContentView.swift */,
+				E4F8AF40268FB29800F66F18 /* README.md */,
 				E400EC37268E6895008E1CE5 /* Assets.xcassets */,
 				E400EC3C268E6895008E1CE5 /* LaunchScreen.storyboard */,
 				E400EC3F268E6895008E1CE5 /* Info.plist */,

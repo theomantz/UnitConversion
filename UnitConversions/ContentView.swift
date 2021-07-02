@@ -16,6 +16,7 @@ struct ContentView: View {
 //    Initialize conversion type array
     let conversionTypes = ["Temperature", "Length", "Volume"]
     let systems = ["Metric", "Imperial"]
+    let tempMeasures = ["Fahrenheit", "Celsius", "Kelvin"]
     
     var body: some View {
         NavigationView {
@@ -26,14 +27,17 @@ struct ContentView: View {
                             Text("\(self.conversionTypes[$0])")
                         }
                     }
+                    .pickerStyle(SegmentedPickerStyle())
                 }
-                Section (header: Text("What are the units?")){
+                Section (header: Text("Converting From")){
                     Picker("From Units", selection: $inputSystem) {
                         ForEach(0 ..< systems.count) {
                             Text("\(self.systems[$0])")
                         }
                     }
                     .pickerStyle(SegmentedPickerStyle())
+                }
+                Section (header: Text("Converting To")) {
                     Picker("To Units", selection: $outputSystem) {
                         ForEach(0 ..< systems.count) {
                             Text("\(self.systems[$0])")

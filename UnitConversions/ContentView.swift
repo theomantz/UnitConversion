@@ -32,6 +32,8 @@ struct ContentView: View {
         let iUnit = measures[conversionType][inputSystem][inputUnits]
         let oUnit = measures[conversionType][inputSystem][inputUnits]
         
+        
+        
         return 0.0
     }
     
@@ -81,7 +83,7 @@ struct ContentView: View {
                         .multilineTextAlignment(.center)
                 }
             }
-            .navigationBarTitle("UnitConverter")
+            .navigationBarTitle("Unitify")
         }
     }
 }

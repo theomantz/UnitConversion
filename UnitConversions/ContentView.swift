@@ -31,8 +31,34 @@ struct ContentView: View {
         let oSystem = systems[outputSystem]
         let iUnit = measures[conversionType][inputSystem][inputUnits]
         let oUnit = measures[conversionType][inputSystem][inputUnits]
+        let localInput = Double(input) ?? 0
         
+        var intermediateValue = 0.0
         
+        if (type == "Temperature") {
+            if (iSystem == "Metric" ) {
+                if (oSystem == "Metric" ) {
+                    return localInput
+                } else {
+                    return (localInput * (9/5)) + 32
+                }
+            } else {
+                if (oSystem == "Imperial") {
+                    return localInput
+                } else {
+                    return ((localInput - 32) * (5/9))
+                }
+            }
+        } else if (type == "Length") {
+            if (iSystem == "Metric") {
+                intermediateValue = iUnit == "Meter" ? localInput : localInput / 1000
+                if (oSystem == "Metric") {
+                    
+                } else {
+                    
+                }
+            }
+        }
         
         return 0.0
     }

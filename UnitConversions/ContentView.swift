@@ -31,7 +31,7 @@ struct ContentView: View {
         let oSystem = systems[outputSystem]
         let iUnit = measures[conversionType][inputSystem][inputUnits]
         let oUnit = measures[conversionType][inputSystem][inputUnits]
-        let localInput = Double(input) ?? 0
+        let localInput = Double(input) ?? 0.0000000001
         
         var intermediateValue = 0.0
         
@@ -40,7 +40,7 @@ struct ContentView: View {
                 if (oSystem == "Metric" ) {
                     return localInput
                 } else {
-                    return (localInput * (9/5)) + 32
+                    return localInput == 0.0000000001 ? 0 : (localInput * (9/5)) + 32
                 }
             } else {
                 if (oSystem == "Imperial") {
@@ -53,9 +53,45 @@ struct ContentView: View {
             if (iSystem == "Metric") {
                 intermediateValue = iUnit == "Meter" ? localInput : localInput / 1000
                 if (oSystem == "Metric") {
-                    
+                    return oUnit == "Meter" ? intermediateValue : intermediateValue * 1000
                 } else {
-                    
+                    if (oUnit == "Foot") {
+                        return intermediateValue * 3.28084
+                    } else if (oUnit == "Yard") {
+                        return intermediateValue * 1.09361
+                    } else {
+                        return intermediateValue * 0.000621371
+                    }
+                }
+            } else {
+                if (iUnit == "Foot") {
+                    intermediateValue = localInput
+                } else {
+                    intermediateValue = iUnit == "Yard" ? localInput * 3 : localInput * 5280
+                }
+                if (oSystem == "Imperial") {
+                    if (oUnit == "Foot") {
+                        return intermediateValue
+                    } else {
+                        return oUnit == "Yard" ? intermediateValue / 3 : intermediateValue / 5280
+                    }
+                } else {
+                    return oUnit == "Meter" ? intermediateValue * 0.3048 : intermediateValue * 0.0003048
+                }
+            }
+        } else if (type == "Volume") {
+            if (iSystem == "Metric") {
+                intermediateValue = iUnit == "Liter" ? localInput : localInput / 1000
+                if (oSystem == "Metric") {
+                    return oUnit == "Liter" ? intermediateValue : intermediateValue * 1000
+                } else {
+                    if (oUnit == "Pint") {
+                        return intermediateValue * 2.11338
+                    } else if (oUnit == "Quart") {
+                        return intermediateValue * 1.05669
+                    } else {
+                        return intermediateValue * 0.26417250012978
+                    }
                 }
             }
         }

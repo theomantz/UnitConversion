@@ -93,6 +93,21 @@ struct ContentView: View {
                         return intermediateValue * 0.26417250012978
                     }
                 }
+            } else if (iSystem == "Imperial") {
+                if (iUnit == "Pint") {
+                    intermediateValue = localInput * 0.125
+                } else {
+                    intermediateValue = iUnit == "Quart" ? localInput * 0.25 : localInput
+                }
+                if (oSystem == "Imperial") {
+                    if (oUnit == "Pint") {
+                        return intermediateValue / 0.125
+                    } else {
+                        return oUnit == "Gallon" ? intermediateValue : intermediateValue / 0.25
+                    }
+                } else {
+                    return intermediateValue * (oUnit == "Liter" ? 3.78541 : 3785.41)
+                }
             }
         }
         
